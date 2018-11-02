@@ -41,8 +41,8 @@ module "OracleRDSdb" {
 
   # Make sure that database name is capitalized, otherwise RDS will try to recreate RDS instance every time
   name                                = "DEMODB"
-  username                            = "phh"
-  password                            = "Everton01"
+  username                            = "user1"
+  password                            = "Password1"
   port                                = "1521"
   iam_database_authentication_enabled = false
 
