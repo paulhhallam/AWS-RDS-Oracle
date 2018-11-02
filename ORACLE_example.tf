@@ -9,8 +9,7 @@ provider "aws" {
   region     = "${var.region}"
   version    = "~> 1.30"
 }
-###
-###
+
 ##############################################################
 # Data sources to get VPC, subnets and security group details
 ##############################################################
@@ -46,49 +45,36 @@ module "OracleRDSdb" {
   port                                = "1521"
   iam_database_authentication_enabled = false
 
-#  vpc_security_group_ids = ["${data.aws_security_group.default.id}"]
+# vpc_security_group_ids = ["${data.aws_security_group.default.id}"]
   vpc_security_group_ids = ["sg-a42140ce"]
   maintenance_window     = "Mon:00:00-Mon:03:00"
   backup_window          = "03:00-06:00"
 
-  # disable backups to create DB faster
+# disable backups to create DB faster
   backup_retention_period = 0
-
   tags = {
     Owner       = "user"
     Environment = "dev"
   }
- # DB subnet group
+
+  # DB subnet group
   subnet_ids = ["subnet-92e3acfa", "subnet-a4be3ade", "subnet-a806e9e4"]
 
-  # DB parameter group
+# DB parameter group
   family = "oracle-ee-12.1"
 
-  # DB option group
+# DB option group
   major_engine_version = "12.1"
 
-  # Snapshot name upon DB deletion
+# Snapshot name upon DB deletion
   final_snapshot_identifier = "demodb"
 
-  # See here for support character sets https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Appendix.OracleCharacterSets.html
+# See here for support character sets https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Appendix.OracleCharacterSets.html
   character_set_name = "AL32UTF8"
 
 }
-
-
-
-
-
-#resource "aws_eip" "ip" {
-#  instance = "${aws_instance.example.id}"
-#}
-
 
 ### OUTPUT
 output "ami" {
   value = "${lookup(var.amis, var.region)}"
 }
-##output "ip" {
-##  value = "${aws_eip.ip.public_ip}"
-##}
-## terraform output ip
