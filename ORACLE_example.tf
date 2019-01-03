@@ -76,6 +76,19 @@ module "OracleRDSdb" {
 }
 
 ### OUTPUT
-output "ami" {
-  value = "${lookup(var.amis, var.region)}"
+output "EndPoint" {
+  value = "${aws_db_instance.OracleRDSdb.endpoint}"
 }
+output "Identifier" {
+  value = "${aws_db_instance.OracleRDSdb.identifier}"
+}
+output "DB_Name" {
+  value = "${aws_db_instance.OracleRDSdb.name}"
+}
+output "Port" {
+  value = "${aws_db_instance.OracleRDSdb.port}"
+}
+output "Username" {
+  value = "${aws_db_instance.OracleRDSdb.username}"
+}
+
