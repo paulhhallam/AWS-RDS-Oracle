@@ -30,6 +30,7 @@ module "OracleRDSdb" {
  source = "terraform-aws-modules/rds/aws"
 
   identifier = "demodb"
+  publicly_accessible = "true"
 
   engine            = "oracle-ee"
   engine_version    = "12.1.0.2.v8"
